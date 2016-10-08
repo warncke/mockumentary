@@ -20,8 +20,8 @@ describe('mockumentary', function () {
         // create new mock factory with two default methods, foo and bar,
         // that return true and false every time they are called.
         var FooMock = new Mockumentary({
-            bar: false,
-            foo: true,
+            bar: ()=> false,
+            foo: ()=> true,
         })
         // create new mock with default properties
         var fooMock = new FooMock()
@@ -37,8 +37,8 @@ describe('mockumentary', function () {
         // and a custom method bam
         var FooMock = new Mockumentary({
             bam: function () {return true},
-            bar: ()=> false,
-            foo: true,
+            bar: false,
+            foo: ()=> true,
         })
         // create new mock with default properties
         var fooMock = new FooMock()
@@ -54,7 +54,7 @@ describe('mockumentary', function () {
     it('should allow specifying default methods with mutliple return values', function () {
         // create new mock factory with a default method foo that returns multiple values
         var FooMock = new Mockumentary({
-            foo: [true, false, null, 0, 1, [1,2], {foo: 'bar'}, ()=>true],
+            foo: ()=> [true, false, null, 0, 1, [1,2], {foo: 'bar'}, ()=>true],
         })
         // create new mock with default properties
         var fooMock = new FooMock()
@@ -76,12 +76,12 @@ describe('mockumentary', function () {
         // create new mock factory with two default methods, foo and bar,
         // that return true and false every time they are called.
         var FooMock = new Mockumentary({
-            bar: false,
-            foo: true,
+            bar: ()=> false,
+            foo: ()=> true,
         })
         // create new mock with bar overridden
         var fooMock = new FooMock({
-            bar: true
+            bar: ()=> true,
         })
         // check that override method has correct value
         assert.strictEqual(fooMock.bar(), true)
