@@ -1,0 +1,22 @@
+{
+  "author": "Ersun Warncke <ersun.warncke@gmail.com>",
+  "dependencies": {
+    "lodash": "^4.16.4"
+  },
+  "description": "Mock factory factory",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "license": "MIT",
+  "main": "lib/mockumentary.js",
+  "name": "mockumentary",
+  "repository": "warncke/mockumentary",
+  "scripts": {
+    "test": "mocha"
+  },
+  "version": "0.1.0"
+}
