@@ -54,7 +54,7 @@ describe('mockumentary', function () {
     it('should allow specifying default methods with mutliple return values', function () {
         // create new mock factory with a default method foo that returns multiple values
         var FooMock = new Mockumentary({
-            foo: ()=> [true, false, null, 0, 1, [1,2], {foo: 'bar'}, ()=>true],
+            foo: ()=> [true, false, null, undefined, 0, 1, [1,2], {foo: 'bar'}, function () {return true}],
         })
         // create new mock with default properties
         var fooMock = new FooMock()
@@ -64,6 +64,7 @@ describe('mockumentary', function () {
             assert.strictEqual(fooMock.foo(), true, 'loop '+i)
             assert.strictEqual(fooMock.foo(), false, 'loop '+i)
             assert.strictEqual(fooMock.foo(), null, 'loop '+i)
+            assert.strictEqual(fooMock.foo(), undefined, 'loop '+i)
             assert.strictEqual(fooMock.foo(), 0, 'loop '+i)
             assert.strictEqual(fooMock.foo(), 1, 'loop '+i)
             assert.deepEqual(fooMock.foo(), [1,2], 'loop '+i)
@@ -87,6 +88,36 @@ describe('mockumentary', function () {
         assert.strictEqual(fooMock.bar(), true)
         // check that default method has correct value
         assert.strictEqual(fooMock.foo(), true)
+    })
+
+    it('should allow specifying multiple custom functions that are called in order', function () {
+        // create new mock factory with a default method foo that returns multiple values
+        var FooMock = new Mockumentary({
+            foo: ()=> [
+                (x, y) => {
+                    // validate args
+                    assert.strictEqual(x, 0)
+                    assert.strictEqual(y, 1)
+                    // return false on first call
+                    return false
+                },
+                (x, y) => {
+                    // validate args
+                    assert.strictEqual(x, 0)
+                    assert.strictEqual(y, 1)
+                    // return true on second call
+                    return true
+                }
+            ],
+        })
+        // create new mock with default properties
+        var fooMock = new FooMock()
+        // call foo multiple times in loop - should return different value each time
+        // then reset to first value
+        for (var i=0; i < 3; i++) {
+            assert.strictEqual(fooMock.foo(0, 1), false, 'loop '+i)
+            assert.strictEqual(fooMock.foo(0, 1), true, 'loop '+i)
+        }
     })
 
 })
