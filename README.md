@@ -58,3 +58,14 @@ to specify functions that should be called.
 
 When `bam` is called the arrow function will be called with the original
 arguments for `bam` and its return value will be returned.
+
+## Creating a single mock method
+
+    var method = new Mock([
+        true,
+        true,
+        false,
+    ])
+
+If an array is passed to instantiate a new Mock then only a single method will
+be created instead of an object.

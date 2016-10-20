@@ -120,4 +120,19 @@ describe('mockumentary', function () {
         }
     })
 
+    it('should allow creating a single mock method instead of a mock object factory', function () {
+        // create new mock method
+        var mockMethod = new Mockumentary([
+            true,
+            true,
+            false,
+        ])
+        // should return method
+        assert.isFunction(mockMethod)
+        // test return values for mock method
+        assert.strictEqual(mockMethod(), true)
+        assert.strictEqual(mockMethod(), true)
+        assert.strictEqual(mockMethod(), false)
+    })
+
 })
