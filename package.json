@@ -6,7 +6,7 @@
   "description": "Mock factory factory",
   "devDependencies": {
     "chai": "4.1.2",
-    "mocha": "3.5.3"
+    "mocha": "4.0.0"
   },
   "directories": {
     "test": "test"
@@ -18,5 +18,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.3.15"
+  "version": "0.3.16"
 }
